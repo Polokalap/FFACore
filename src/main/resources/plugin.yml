@@ -1,0 +1,19 @@
+name: FFACore
+prefix: "FFA Core"
+version: '${version}'
+
+main: mel.Polokalap.ffa.Main
+api-version: '1.21.11'
+load: POSTWORLD
+
+authors: [ Polokalap ]
+website: ko-fi.com/Polokalap
+
+commands:
+  selection-wand:
+    description: "Arena selection wand"
+  add-arena:
+    description: "Add arena"
+permission:
+  ffa.admin:
+    default: op

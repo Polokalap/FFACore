@@ -1,0 +1,31 @@
+console:
+  startup: "Plugin started!"
+  shutdown: "Plugin shutting down!"
+  player: "You must be a player to run that command!"
+
+items:
+  selection-wand:
+    item: "STONE_PICKAXE"
+    name: "<dark_gray>sᴇʟᴇᴄᴛɪᴏɴ ᴡᴀɴᴅ"
+
+player:
+  permission: "<red>You do not have permission to run that command."
+  item-given: "<green>Item given succesfully!"
+  primary: "<gray>Selected primary location <dark_gray>(X: <x>, Y: <y>, Z: <z>)"
+  secondary: "<gray>Selected secondary location <dark_gray>(X: <x>, Y: <y>, Z: <z>)"
+  missing-selection: "<red>Please select <b>2 points</b>"
+  arena-already-exists: "<red>An arena with this name already exists!"
+  missing-name: "<red>You must set a name!"
+
+gui:
+  add-arena:
+    title: "<color:#00b7ff>Add arena:</color> <white><name>"
+    items:
+      set-name:
+        name: "<red>Set name"
+        type: "OAK_SIGN"
+        lore:
+          - "<white>Click here to change"
+          - "<white>arena name"
+        slot: 13
+        key: "set-arena-name"
