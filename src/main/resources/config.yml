@@ -114,6 +114,40 @@ gui:
           - "<white>to the map"
         slot: 12
         key: "warp"
+      block-break:
+        name: "<gray>Block Breaking/Placing"
+        type: "STONECUTTER"
+        lore:
+          - "<white>Set if players should be"
+          - "<white>able to break and place"
+          - "<white>blocks."
+          - "<white>Currently: <state>"
+        slot: 13
+        key: "block-breaking-state"
+      block-decay:
+        name: "<gray>Block decay time"
+        type: "CLOCK"
+        lore:
+          - "<white>Set block decay time"
+          - "<white>Currently: <state>"
+        slot: 14
+        key: "block-decay"
+      map-regeneration:
+        name: "<gray>Map regeneration time"
+        type: "RECOVERY_COMPASS"
+        lore:
+          - "<white>Set map regeneration time"
+          - "<white>Currently: <state>"
+        slot: 15
+        key: "map-regeneration"
+      explosion:
+        name: "<gray>Explosions"
+        type: "TNT"
+        lore:
+          - "<white>Enable explosions"
+          - "<white>Currently: <state>"
+        slot: 16
+        key: "explosions"
       delete:
         name: "<red>Delete map"
         type: "BARRIER"
@@ -121,7 +155,7 @@ gui:
           - "<white>Click here to delete the map"
           - ""
           - "<red><b>THIS ACTION CANNOT BE REVERTED"
-        slot: 16
+        slot: 25
         key: "delete"
 
 states:

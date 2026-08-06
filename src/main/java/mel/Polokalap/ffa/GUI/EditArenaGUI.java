@@ -1,9 +1,7 @@
 package mel.Polokalap.ffa.GUI;
 
-import mel.Polokalap.ffa.Utils.Arena;
-import mel.Polokalap.ffa.Utils.ArenaUtil;
-import mel.Polokalap.ffa.Utils.ComponentUtil;
-import mel.Polokalap.ffa.Utils.ItemUtil;
+import mel.Polokalap.ffa.Commands.AddArenaCommand;
+import mel.Polokalap.ffa.Utils.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -35,7 +33,7 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
                         Placeholder.unparsed("name", arena.getName())
                 )
         );
-        size = 27;
+        size = 36;
         holder = this;
 
         super.openGUI(player);
@@ -75,6 +73,139 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
             menu.setItem(section.getInt("slot", 0), item);
 
         }
+
+        ItemStack setName = new ItemStack(Material.valueOf(itemsSection.getString("set-name.type")));
+        ItemMeta setNameMeta = setName.getItemMeta();
+
+        setNameMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.set-name.name"));
+        List<Component> setNameLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("set-name.lore")) {
+
+            setNameLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        setNameMeta.lore(setNameLore);
+        ItemUtil.assignPDC(itemsSection.getString("set-name.key", "default"), setNameMeta);
+
+        setName.setItemMeta(setNameMeta);
+        menu.setItem(itemsSection.getInt("set-name.slot", 20), setName);
+        ItemStack blockBreak = new ItemStack(Material.valueOf(itemsSection.getString("block-break.type")));
+        ItemMeta blockBreakMeta = blockBreak.getItemMeta();
+
+        blockBreakMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.block-break.name"));
+        List<Component> blockBreakLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("block-break.lore")) {
+
+            blockBreakLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(openedArena.get(player).getBlockState()))
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        blockBreakMeta.lore(blockBreakLore);
+        ItemUtil.assignPDC(itemsSection.getString("block-break.key", "default"), blockBreakMeta);
+
+        blockBreak.setItemMeta(blockBreakMeta);
+        menu.setItem(itemsSection.getInt("block-break.slot", 19), blockBreak);
+
+        ItemStack blockDecay = new ItemStack(Material.valueOf(itemsSection.getString("block-decay.type")));
+        ItemMeta blockDecayMeta = blockDecay.getItemMeta();
+
+        blockDecayMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.block-decay.name"));
+        List<Component> blockDecayLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("block-decay.lore")) {
+
+            blockDecayLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(openedArena.get(player).getDecay()))
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        blockDecayMeta.lore(blockDecayLore);
+        ItemUtil.assignPDC(itemsSection.getString("block-decay.key", "default"), blockDecayMeta);
+
+        blockDecay.setItemMeta(blockDecayMeta);
+        menu.setItem(itemsSection.getInt("block-decay.slot", 20), blockDecay);
+
+        ItemStack mapRegeneration = new ItemStack(Material.valueOf(itemsSection.getString("map-regeneration.type")));
+        ItemMeta mapRegenerationMeta = mapRegeneration.getItemMeta();
+
+        mapRegenerationMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.map-regeneration.name"));
+        List<Component> mapRegenerationLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("map-regeneration.lore")) {
+
+            mapRegenerationLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(openedArena.get(player).getRegenerationTime()))
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        mapRegenerationMeta.lore(mapRegenerationLore);
+        ItemUtil.assignPDC(itemsSection.getString("map-regeneration.key", "default"), mapRegenerationMeta);
+
+        mapRegeneration.setItemMeta(mapRegenerationMeta);
+        menu.setItem(itemsSection.getInt("map-regeneration.slot", 21), mapRegeneration);
+
+        ItemStack explosion = new ItemStack(Material.valueOf(itemsSection.getString("explosion.type")));
+        ItemMeta explosionMeta = explosion.getItemMeta();
+
+        explosionMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.explosion.name"));
+        List<Component> explosionLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("explosion.lore")) {
+
+            explosionLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(openedArena.get(player).getExplosionState()))
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        explosionMeta.lore(explosionLore);
+        ItemUtil.assignPDC(itemsSection.getString("explosion.key", "default"), explosionMeta);
+
+        explosion.setItemMeta(explosionMeta);
+        menu.setItem(itemsSection.getInt("explosion.slot", 22), explosion);
 
     }
 

@@ -5,6 +5,8 @@ import mel.Polokalap.ffa.Commands.ArenasCommand;
 import mel.Polokalap.ffa.GUI.EditArenaGUI;
 import mel.Polokalap.ffa.Main;
 import mel.Polokalap.ffa.Utils.*;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
@@ -18,7 +20,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class EditArenaGUIListener implements Listener {
 
@@ -90,6 +94,126 @@ public class EditArenaGUIListener implements Listener {
             Sound.Click(player);
             player.teleport(arena.getSpawn());
             arena.regenerate();
+
+        }
+
+        if (ItemUtil.hasPDC("block-breaking-state", item)) {
+
+            arena.setBlockState(arena.getBlockState().next());
+            arena.restart();
+            arena.writeToFile();
+            List<Component> lore = new ArrayList<>();
+
+            for (String line : itemsSection.getStringList("block-break.lore")) {
+
+                lore.add(
+                        MiniMessage.miniMessage().deserialize(
+                                line,
+                                TagResolver.resolver(
+                                        Placeholder.component("state",
+                                                MiniMessage.miniMessage().deserialize(
+                                                        States.getString(arena.getBlockState()))
+                                        )
+                                )
+                        ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+                );
+
+            }
+
+            meta.lore(lore);
+            item.setItemMeta(meta);
+
+            Sound.Click(player);
+
+        }
+
+        if (ItemUtil.hasPDC("block-decay", item)) {
+
+            arena.setDecayTime(arena.getDecay().next());
+            arena.restart();
+            arena.writeToFile();
+            List<Component> lore = new ArrayList<>();
+
+            for (String line : itemsSection.getStringList("block-decay.lore")) {
+
+                lore.add(
+                        MiniMessage.miniMessage().deserialize(
+                                line,
+                                TagResolver.resolver(
+                                        Placeholder.component("state",
+                                                MiniMessage.miniMessage().deserialize(
+                                                        States.getString(arena.getDecay()))
+                                        )
+                                )
+                        ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+                );
+
+            }
+
+            meta.lore(lore);
+            item.setItemMeta(meta);
+
+            Sound.Click(player);
+
+        }
+
+        if (ItemUtil.hasPDC("map-regeneration", item)) {
+
+            arena.setRegenerationTime(arena.getRegenerationTime().next());
+            arena.restart();
+            arena.writeToFile();
+            List<Component> lore = new ArrayList<>();
+
+            for (String line : itemsSection.getStringList("map-regeneration.lore")) {
+
+                lore.add(
+                        MiniMessage.miniMessage().deserialize(
+                                line,
+                                TagResolver.resolver(
+                                        Placeholder.component("state",
+                                                MiniMessage.miniMessage().deserialize(
+                                                        States.getString(arena.getRegenerationTime()))
+                                        )
+                                )
+                        ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+                );
+
+            }
+
+            meta.lore(lore);
+            item.setItemMeta(meta);
+
+            Sound.Click(player);
+
+        }
+
+        if (ItemUtil.hasPDC("explosions", item)) {
+
+            arena.setExplosionState(arena.getExplosionState().next());
+            arena.restart();
+            arena.writeToFile();
+            List<Component> lore = new ArrayList<>();
+
+            for (String line : itemsSection.getStringList("explosion.lore")) {
+
+                lore.add(
+                        MiniMessage.miniMessage().deserialize(
+                                line,
+                                TagResolver.resolver(
+                                        Placeholder.component("state",
+                                                MiniMessage.miniMessage().deserialize(
+                                                        States.getString(arena.getExplosionState()))
+                                        )
+                                )
+                        ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+                );
+
+            }
+
+            meta.lore(lore);
+            item.setItemMeta(meta);
+
+            Sound.Click(player);
 
         }
 
