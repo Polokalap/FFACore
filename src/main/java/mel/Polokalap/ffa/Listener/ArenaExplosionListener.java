@@ -101,12 +101,12 @@ public class ArenaExplosionListener implements Listener {
 
         for (Arena arena : ArenaUtil.getArenas()) {
 
-            if (
-                arena.getExplosionState() == States.ExplosionState.DAMAGE ||
-                arena.getExplosionState() == States.ExplosionState.BOTH
-            ) return;
-
             if (arena.inArea(player)) {
+
+                if (
+                    arena.getExplosionState() == States.ExplosionState.DAMAGE ||
+                    arena.getExplosionState() == States.ExplosionState.BOTH
+                ) continue;
 
                 event.setCancelled(true);
                 return;
