@@ -16,6 +16,11 @@ player:
   missing-selection: "<red>Please select <b>2 points</b>"
   arena-already-exists: "<red>An arena with this name already exists!"
   missing-name: "<red>You must set a name!"
+  type-name: "<green>Type the new name of the arena in the chat!"
+  saved-arena: "<green>Successfully saved arena!"
+  arena-doesnt-exist: "<red>Arena doesn't exist!"
+  arena-regenerated: "<green>Arena regenerated!"
+  arena-deleted: "<green>Arena <white><name></white> has been deleted!"
 
 gui:
   add-arena:
@@ -27,5 +32,122 @@ gui:
         lore:
           - "<white>Click here to change"
           - "<white>arena name"
-        slot: 13
+        slot: 10
         key: "set-arena-name"
+      block-break:
+        name: "<gray>Block Breaking/Placing"
+        type: "STONECUTTER"
+        lore:
+          - "<white>Set if players should be"
+          - "<white>able to break and place"
+          - "<white>blocks."
+          - "<white>Currently: <state>"
+        slot: 11
+        key: "block-breaking-state"
+      block-decay:
+        name: "<gray>Block decay time"
+        type: "CLOCK"
+        lore:
+          - "<white>Set block decay time"
+          - "<white>Currently: <state>"
+        slot: 12
+        key: "block-decay"
+      map-regeneration:
+        name: "<gray>Map regeneration time"
+        type: "RECOVERY_COMPASS"
+        lore:
+          - "<white>Set map regeneration time"
+          - "<white>Currently: <state>"
+        slot: 13
+        key: "map-regeneration"
+      explosion:
+        name: "<gray>Explosions"
+        type: "TNT"
+        lore:
+          - "<white>Enable explosions"
+          - "<white>Currently: <state>"
+        slot: 14
+        key: "explosions"
+      confirm:
+        name: "<green>Confirm"
+        type: "LIME_CONCRETE"
+        lore:
+          - "<white>Click here to save"
+          - "<white>the arena"
+        slot: 16
+        key: "save-arena"
+  edit-arenas:
+    title: "<color:#00b7ff>Edit arenas"
+    items:
+      close:
+        name: "<red>Close"
+        type: "BARRIER"
+        lore:
+          - "<white>Click here to close"
+          - "<white>the menu"
+        slot: 53
+        key: "close"
+  edit-arena:
+    title: "<color:#00b7ff>Edit arena: <white><name>"
+    items:
+      set-name:
+        name: "<gray>Set name"
+        type: "OAK_SIGN"
+        lore:
+          - "<white>Click here to change"
+          - "<white>arena name"
+        slot: 10
+        key: "set-arena-name"
+      regenerate:
+        name: "<gray>Regenerate map"
+        type: "RESPAWN_ANCHOR"
+        lore:
+          - "<white>Click here to regenerate"
+          - "<white>the map"
+        slot: 11
+        key: "regenerate"
+      warp:
+        name: "<gray>Warp to spawn"
+        type: "ENDER_EYE"
+        lore:
+          - "<white>Click here to teleport"
+          - "<white>to the map"
+        slot: 12
+        key: "warp"
+      delete:
+        name: "<red>Delete map"
+        type: "BARRIER"
+        lore:
+          - "<white>Click here to delete the map"
+          - ""
+          - "<red><b>THIS ACTION CANNOT BE REVERTED"
+        slot: 16
+        key: "delete"
+
+states:
+  block-state:
+    none: "<red><b>None"
+    place: "<yellow><b>Only Place"
+    break: "<yellow><b>Only Break"
+    both: "<green><b>Both"
+
+  decay-time:
+    five-seconds: "<green><b>5 Seconds"
+    ten-seconds: "<green><b>10 Seconds"
+    thirty-seconds: "<green><b>30 Seconds"
+    one-minute: "<green><b>1 Minute"
+    three-minutes: "<green><b>3 Minutes"
+    never: "<red><b>Never"
+
+  regeneration-time:
+    thirty-minutes: "<green><b>30 Minutes"
+    one-hour: "<green><b>1 Hour"
+    six-hours: "<green><b>6 Hours"
+    one-day: "<green><b>1 Day"
+    never: "<red><b>Never"
+
+  explosion-state:
+    none: "<red><b>None"
+    damage: "<yellow><b>Only Damage"
+    break: "<yellow><b>Only Break"
+    both: "<green><b>Both"

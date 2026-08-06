@@ -1,7 +1,8 @@
 package mel.Polokalap.ffa.Commands;
 
 import mel.Polokalap.ffa.GUI.AddArenaGUI;
-import mel.Polokalap.ffa.Listener.AddGUIListener;
+import mel.Polokalap.ffa.GUI.EditArenaGUI;
+import mel.Polokalap.ffa.GUI.EditArenasGUI;
 import mel.Polokalap.ffa.Utils.Arena;
 import mel.Polokalap.ffa.Utils.ArenaUtil;
 import mel.Polokalap.ffa.Utils.ComponentUtil;
@@ -16,15 +17,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import static mel.Polokalap.ffa.Listener.ArenaSelectionListener.pos1;
 import static mel.Polokalap.ffa.Listener.ArenaSelectionListener.pos2;
 import static mel.Polokalap.ffa.Main.getInstance;
 
-public class AddArenaCommand implements CommandExecutor, TabExecutor {
+public class ArenasCommand implements CommandExecutor, TabExecutor {
 
-    public static HashMap<Player, Arena> arena = new HashMap<>();
+    public static HashMap<Player, Arena> openedArena = new HashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
@@ -43,48 +43,36 @@ public class AddArenaCommand implements CommandExecutor, TabExecutor {
 
         }
 
-        if (
-                pos1.get(player) == null ||
-                pos2.get(player) == null
-        ) {
-
-            player.sendMessage(ComponentUtil.getComponent("player.missing-selection"));
-            return true;
-
-        }
-
         if (args.length < 1) {
 
-            player.sendMessage(ComponentUtil.getComponent("player.missing-name"));
+            new EditArenasGUI().openGUI(player);
             return true;
 
         }
 
-        if (ArenaUtil.getArenaNames().contains(args[0].toLowerCase())) {
+        if (!ArenaUtil.getArenaNames().contains(args[0].toLowerCase())) {
 
-            player.sendMessage(ComponentUtil.getComponent("player.arena-already-exists"));
+            player.sendMessage(ComponentUtil.getComponent("player.arena-doesnt-exist"));
             return true;
 
         }
 
-        AddGUIListener.isTyping.put(player, false);
+        Arena selectedArena = null;
 
-        arena.put(
-                player,
-                new Arena(
-                        UUID.randomUUID(),
-                        args[0].toLowerCase(),
-                        player.getLocation(),
-                        pos1.get(player),
-                        pos2.get(player),
-                        States.BlockState.NONE,
-                        States.DecayTime.THREE_MINUTES,
-                        States.RegenerationTime.NEVER,
-                        States.ExplosionState.BOTH
-                )
-        );
+        for (Arena arena : ArenaUtil.getArenas()) {
 
-        new AddArenaGUI().openGUI(player);
+            if (arena.getName().equalsIgnoreCase(args[0])) {
+
+                selectedArena = arena;
+
+            }
+
+        }
+
+        if (selectedArena == null) return true;
+
+        openedArena.put(player, selectedArena);
+        new EditArenaGUI().openGUI(player);
 
         return true;
 
@@ -93,6 +81,7 @@ public class AddArenaCommand implements CommandExecutor, TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
 
+        if (args.length == 1) return ArenaUtil.getArenaNames();
         return List.of();
 
     }

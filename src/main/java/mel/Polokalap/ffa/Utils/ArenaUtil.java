@@ -1,9 +1,13 @@
 package mel.Polokalap.ffa.Utils;
 
 import mel.Polokalap.ffa.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ArenaUtil {
 
@@ -19,6 +23,55 @@ public class ArenaUtil {
         }
 
         return list;
+
+    }
+
+    public static ArrayList<Arena> getArenas() {
+
+        ArrayList<Arena> list = new ArrayList<>();
+        ConfigurationSection arenasSection = Main.getArenasConfig().getConfigurationSection("arenas");
+
+        if (arenasSection == null) return list;
+
+        for (String key : arenasSection.getKeys(false)) {
+
+            ConfigurationSection section = arenasSection.getConfigurationSection(key);
+            if (section == null) continue;
+
+            list.add(
+                    new Arena(
+                            UUID.fromString(section.getString("uuid")),
+                            section.getString("name"),
+                            loadLocation(section.getConfigurationSection("spawn")),
+                            loadLocation(section.getConfigurationSection("pos1")),
+                            loadLocation(section.getConfigurationSection("pos2")),
+                            States.BlockState.valueOf(section.getString("block-state")),
+                            States.DecayTime.valueOf(section.getString("decay-time")),
+                            States.RegenerationTime.valueOf(section.getString("regeneration-time")),
+                            States.ExplosionState.valueOf(section.getString("explosion-state"))
+                    )
+            );
+
+        }
+
+        return list;
+
+    }
+
+    private static Location loadLocation(ConfigurationSection section) {
+
+        if (section == null) return null;
+
+        World world = Bukkit.getWorld(section.getString("world"));
+        if (world == null) return null;
+
+        double x = section.getDouble("x");
+        double y = section.getDouble("y");
+        double z = section.getDouble("z");
+        float yaw = (float) section.getDouble("yaw");
+        float pitch = (float) section.getDouble("pitch");
+
+        return new Location(world, x, y, z, yaw, pitch);
 
     }
 
