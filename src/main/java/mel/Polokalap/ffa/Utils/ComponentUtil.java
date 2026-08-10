@@ -11,20 +11,18 @@ public class ComponentUtil {
 
     public static Component getComponent(String path) {
 
-        getInstance().reloadConfig();
+        String message = getInstance().getConfig().getString(path, "?");
 
         return MiniMessage.miniMessage().deserialize(
-                getInstance().getConfig().getString(path, "?")
+                message
         ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE);
 
     }
 
     public static Component getComponent(String path, TagResolver... resolvers) {
 
-        getInstance().reloadConfig();
-
         String raw = getInstance().getConfig().getString(path, "?");
-        return MiniMessage.miniMessage().deserialize(raw, resolvers);
+        return MiniMessage.miniMessage().deserialize(raw, resolvers).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE);
 
     }
 

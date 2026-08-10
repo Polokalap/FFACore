@@ -22,10 +22,9 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-
         instance = this;
+
+        saveDefaultConfig();
 
         arenas = new File(getDataFolder(), "arenas.yml");
         if (!arenas.exists()) saveResource("arenas.yml", false);
