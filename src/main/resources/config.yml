@@ -26,6 +26,10 @@ player:
   arena-deleted: "<green>Arena <white><name></white> has been deleted!"
   teleported: "<green>Successfully teleported to <white><name></white>!"
   combat: "<red>You are currently in combat!"
+  now-in-combat: "<green>You are now in combat!"
+  combat-left: "<green>You are no longer in combat!"
+  combat-time: "<gold>⌚ <time>s"
+  too-many-arenas: "<red>You have too many arenas! <white>(45/45)</white>"
 
 gui:
   add-arena:

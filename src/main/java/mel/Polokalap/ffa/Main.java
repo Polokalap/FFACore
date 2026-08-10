@@ -4,6 +4,7 @@ import mel.Polokalap.ffa.Commands.*;
 import mel.Polokalap.ffa.Listener.*;
 import mel.Polokalap.ffa.Utils.Arena;
 import mel.Polokalap.ffa.Utils.ArenaUtil;
+import mel.Polokalap.ffa.Utils.CombatManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -48,6 +49,8 @@ public final class Main extends JavaPlugin {
         getCommand("arenas").setTabCompleter(new ArenasCommand());
         getCommand("warp").setExecutor(new WarpCommand());
         getCommand("warp").setTabCompleter(new WarpCommand());
+
+        CombatManager.init();
 
         for (Arena arena : ArenaUtil.getArenas()) {
 

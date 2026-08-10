@@ -61,7 +61,7 @@ public class WarpCommand implements CommandExecutor, TabExecutor {
 
         }
 
-        if (CombatUtil.isInCombat(player)) {
+        if (CombatManager.isInCombat(player)) {
 
             player.sendMessage(ComponentUtil.getComponent("player.combat"));
             return true;

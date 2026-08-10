@@ -94,4 +94,18 @@ public class ArenaUtil {
 
     }
 
+    public static boolean inAnyArena(Player player) {
+
+        ConfigurationSection arenasSection = Main.getArenasConfig().getConfigurationSection("arenas");
+
+        for (Arena arena : getArenas()) {
+
+            if (arena.inArea(player)) return true;
+
+        }
+
+        return false;
+
+    }
+
 }

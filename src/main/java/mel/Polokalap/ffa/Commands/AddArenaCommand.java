@@ -67,6 +67,13 @@ public class AddArenaCommand implements CommandExecutor, TabExecutor {
 
         }
 
+        if (ArenaUtil.getArenas().size() >= 45) {
+
+            player.sendMessage(ComponentUtil.getComponent("player.too-many-arenas"));
+            return true;
+
+        }
+
         AddGUIListener.isTyping.put(player, false);
 
         arena.put(

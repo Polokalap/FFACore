@@ -4,6 +4,7 @@ import mel.Polokalap.ffa.Utils.Arena;
 import mel.Polokalap.ffa.Utils.ArenaUtil;
 import mel.Polokalap.ffa.Utils.States;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class ArenaBlockListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if (player.hasPermission("ffa.admin")) return;
+        if (player.hasPermission("ffa.admin") && !player.getGameMode().equals(GameMode.SURVIVAL)) return;
 
         if (event.getBlock().hasMetadata("player-breakable")) return;
 
