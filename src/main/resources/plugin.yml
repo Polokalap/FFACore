@@ -21,3 +21,5 @@ commands:
 permission:
   ffa.admin:
     default: op
+  ffa.warp.*:
+    default: not op
