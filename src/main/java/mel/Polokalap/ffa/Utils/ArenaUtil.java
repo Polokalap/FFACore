@@ -49,7 +49,8 @@ public class ArenaUtil {
                             States.BlockState.valueOf(section.getString("block-state")),
                             States.DecayTime.valueOf(section.getString("decay-time")),
                             States.RegenerationTime.valueOf(section.getString("regeneration-time")),
-                            States.ExplosionState.valueOf(section.getString("explosion-state"))
+                            States.ExplosionState.valueOf(section.getString("explosion-state")),
+                            Boolean.parseBoolean(section.getString("drops"))
                     )
             );
 

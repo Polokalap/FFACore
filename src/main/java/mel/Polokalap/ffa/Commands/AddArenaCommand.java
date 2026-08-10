@@ -87,7 +87,8 @@ public class AddArenaCommand implements CommandExecutor, TabExecutor {
                         States.BlockState.NONE,
                         States.DecayTime.THREE_MINUTES,
                         States.RegenerationTime.NEVER,
-                        States.ExplosionState.BOTH
+                        States.ExplosionState.BOTH,
+                        false
                 )
         );
 

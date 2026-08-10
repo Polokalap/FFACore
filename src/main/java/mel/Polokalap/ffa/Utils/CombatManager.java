@@ -99,17 +99,18 @@ public class CombatManager {
     public static void endCombat(Player player) {
 
         lastAttack.put(player, 0L);
+
+        Player opponent = lastOpponent.remove(player);
+
+        if (opponent == null) return;
+
         player.sendMessage(ComponentUtil.getComponent("player.combat-left"));
 
-        Player opponent = lastOpponent.get(player);
-
         if (!opponent.isOnline()) return;
-        if (lastOpponent.get(opponent).equals(player)) {
 
-            lastOpponent.remove(player);
-            endCombat(opponent);
+        Player opponentOfOpponent = lastOpponent.get(opponent);
 
-        }
+        if (player.equals(opponentOfOpponent)) endCombat(opponent);
 
     }
 

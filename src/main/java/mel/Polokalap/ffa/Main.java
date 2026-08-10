@@ -39,6 +39,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EditArenasGUIListener(), this);
         Bukkit.getPluginManager().registerEvents(new ArenaBlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new ArenaExplosionListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ArenaDeathListener(), this);
         Bukkit.getPluginManager().registerEvents(new CombatListener(), this);
 
         getCommand("selection-wand").setExecutor(new SelectArenaCommand());

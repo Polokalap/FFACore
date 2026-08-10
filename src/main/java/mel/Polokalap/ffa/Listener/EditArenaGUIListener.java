@@ -217,6 +217,36 @@ public class EditArenaGUIListener implements Listener {
 
         }
 
+        if (ItemUtil.hasPDC("drops", item)) {
+
+            arena.setDrops(!arena.getDrops());
+            arena.restart();
+            arena.writeToFile();
+            List<Component> lore = new ArrayList<>();
+
+            for (String line : itemsSection.getStringList("drops.lore")) {
+
+                lore.add(
+                        MiniMessage.miniMessage().deserialize(
+                                line,
+                                TagResolver.resolver(
+                                        Placeholder.component("state",
+                                                MiniMessage.miniMessage().deserialize(
+                                                        States.getString(arena.getDrops()))
+                                        )
+                                )
+                        ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+                );
+
+            }
+
+            meta.lore(lore);
+            item.setItemMeta(meta);
+
+            Sound.Click(player);
+
+        }
+
     }
 
     @EventHandler

@@ -50,7 +50,7 @@ public class ArenaBlockListener implements Listener {
 
         Player player = event.getPlayer();
 
-        if (player.hasPermission("ffa.admin")) return;
+        if (player.hasPermission("ffa.admin") && !player.getGameMode().equals(GameMode.SURVIVAL)) return;
 
         for (Arena arena : ArenaUtil.getArenas()) {
 

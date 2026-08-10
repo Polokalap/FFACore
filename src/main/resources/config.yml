@@ -77,6 +77,14 @@ gui:
           - "<white>Currently: <state>"
         slot: 14
         key: "explosions"
+      drops:
+        name: "<gray>Item Drops"
+        type: "INK_SAC"
+        lore:
+          - "<white>Enable item drops"
+          - "<white>Currently: <state>"
+        slot: 15
+        key: "drops"
       confirm:
         name: "<green>Confirm"
         type: "LIME_CONCRETE"
@@ -105,7 +113,7 @@ gui:
         lore:
           - "<white>Click here to change"
           - "<white>arena name"
-        slot: 10
+        slot: 19
         key: "set-arena-name"
       regenerate:
         name: "<gray>Regenerate map"
@@ -113,7 +121,7 @@ gui:
         lore:
           - "<white>Click here to regenerate"
           - "<white>the map"
-        slot: 11
+        slot: 10
         key: "regenerate"
       warp:
         name: "<gray>Warp to spawn"
@@ -121,7 +129,7 @@ gui:
         lore:
           - "<white>Click here to teleport"
           - "<white>to the map"
-        slot: 12
+        slot: 11
         key: "warp"
       block-break:
         name: "<gray>Block Breaking/Placing"
@@ -131,7 +139,7 @@ gui:
           - "<white>able to break and place"
           - "<white>blocks."
           - "<white>Currently: <state>"
-        slot: 13
+        slot: 20
         key: "block-breaking-state"
       block-decay:
         name: "<gray>Block decay time"
@@ -139,7 +147,7 @@ gui:
         lore:
           - "<white>Set block decay time"
           - "<white>Currently: <state>"
-        slot: 14
+        slot: 21
         key: "block-decay"
       map-regeneration:
         name: "<gray>Map regeneration time"
@@ -147,7 +155,7 @@ gui:
         lore:
           - "<white>Set map regeneration time"
           - "<white>Currently: <state>"
-        slot: 15
+        slot: 22
         key: "map-regeneration"
       explosion:
         name: "<gray>Explosions"
@@ -155,8 +163,16 @@ gui:
         lore:
           - "<white>Enable explosions"
           - "<white>Currently: <state>"
-        slot: 16
+        slot: 23
         key: "explosions"
+      drops:
+        name: "<gray>Item Drops"
+        type: "INK_SAC"
+        lore:
+          - "<white>Enable item drops"
+          - "<white>Currently: <state>"
+        slot: 24
+        key: "drops"
       delete:
         name: "<red>Delete map"
         type: "BARRIER"
@@ -194,3 +210,7 @@ states:
     damage: "<yellow><b>Only Damage"
     break: "<yellow><b>Only Break"
     both: "<green><b>Both"
+
+  boolean:
+    true: "<b><green>ENABLED"
+    false: "<b><red>DISABLED"

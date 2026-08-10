@@ -17,13 +17,14 @@ public class Arena {
     private States.DecayTime decayTime;
     private States.RegenerationTime regenerationTime;
     private States.ExplosionState explosionState;
+    private boolean drops;
     private Location spawn;
     private Location pos1;
     private Location pos2;
     private UUID uuid;
     private BukkitTask task;
 
-    public Arena(UUID uuid, String name, Location spawn, Location pos1, Location pos2, States.BlockState block, States.DecayTime decay, States.RegenerationTime regeneration, States.ExplosionState explosion) {
+    public Arena(UUID uuid, String name, Location spawn, Location pos1, Location pos2, States.BlockState block, States.DecayTime decay, States.RegenerationTime regeneration, States.ExplosionState explosion, boolean drops) {
 
         this.name = name;
         this.spawn = spawn;
@@ -33,6 +34,7 @@ public class Arena {
         this.decayTime = decay;
         this.regenerationTime = regeneration;
         this.explosionState = explosion;
+        this.drops = drops;
         this.uuid = uuid;
 
     }
@@ -133,6 +135,18 @@ public class Arena {
 
     }
 
+    public boolean getDrops() {
+
+        return drops;
+
+    }
+
+    public void setDrops(boolean drops) {
+
+        this.drops = drops;
+
+    }
+
     public Location getPos1() {
 
         return pos1;
@@ -189,6 +203,7 @@ public class Arena {
         config.set(path + ".decay-time", decayTime.name());
         config.set(path + ".regeneration-time", regenerationTime.name());
         config.set(path + ".explosion-state", explosionState.name());
+        config.set(path + ".drops", drops);
 
         saveLocation(path + ".spawn", spawn);
         saveLocation(path + ".pos1", pos1);

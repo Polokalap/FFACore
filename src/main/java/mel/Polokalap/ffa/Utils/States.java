@@ -146,6 +146,14 @@ public class States {
 
         }
 
+        if (obj instanceof Boolean state) {
+
+            String key = Boolean.toString(state);
+
+            return getInstance().getConfig().getString("states.boolean." + key);
+
+        }
+
         return "?";
 
     }

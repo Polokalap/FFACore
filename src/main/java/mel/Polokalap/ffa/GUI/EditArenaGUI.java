@@ -94,7 +94,7 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
         ItemUtil.assignPDC(itemsSection.getString("set-name.key", "default"), setNameMeta);
 
         setName.setItemMeta(setNameMeta);
-        menu.setItem(itemsSection.getInt("set-name.slot", 20), setName);
+        menu.setItem(itemsSection.getInt("set-name.slot", 19), setName);
         ItemStack blockBreak = new ItemStack(Material.valueOf(itemsSection.getString("block-break.type")));
         ItemMeta blockBreakMeta = blockBreak.getItemMeta();
 
@@ -121,7 +121,7 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
         ItemUtil.assignPDC(itemsSection.getString("block-break.key", "default"), blockBreakMeta);
 
         blockBreak.setItemMeta(blockBreakMeta);
-        menu.setItem(itemsSection.getInt("block-break.slot", 19), blockBreak);
+        menu.setItem(itemsSection.getInt("block-break.slot", 20), blockBreak);
 
         ItemStack blockDecay = new ItemStack(Material.valueOf(itemsSection.getString("block-decay.type")));
         ItemMeta blockDecayMeta = blockDecay.getItemMeta();
@@ -149,7 +149,7 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
         ItemUtil.assignPDC(itemsSection.getString("block-decay.key", "default"), blockDecayMeta);
 
         blockDecay.setItemMeta(blockDecayMeta);
-        menu.setItem(itemsSection.getInt("block-decay.slot", 20), blockDecay);
+        menu.setItem(itemsSection.getInt("block-decay.slot", 21), blockDecay);
 
         ItemStack mapRegeneration = new ItemStack(Material.valueOf(itemsSection.getString("map-regeneration.type")));
         ItemMeta mapRegenerationMeta = mapRegeneration.getItemMeta();
@@ -177,7 +177,7 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
         ItemUtil.assignPDC(itemsSection.getString("map-regeneration.key", "default"), mapRegenerationMeta);
 
         mapRegeneration.setItemMeta(mapRegenerationMeta);
-        menu.setItem(itemsSection.getInt("map-regeneration.slot", 21), mapRegeneration);
+        menu.setItem(itemsSection.getInt("map-regeneration.slot", 22), mapRegeneration);
 
         ItemStack explosion = new ItemStack(Material.valueOf(itemsSection.getString("explosion.type")));
         ItemMeta explosionMeta = explosion.getItemMeta();
@@ -205,7 +205,36 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
         ItemUtil.assignPDC(itemsSection.getString("explosion.key", "default"), explosionMeta);
 
         explosion.setItemMeta(explosionMeta);
-        menu.setItem(itemsSection.getInt("explosion.slot", 22), explosion);
+        menu.setItem(itemsSection.getInt("explosion.slot", 23), explosion);
+
+        ItemStack drops = new ItemStack(Material.valueOf(itemsSection.getString("drops.type")));
+        ItemMeta dropsMeta = drops.getItemMeta();
+
+        dropsMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.drops.name"));
+        List<Component> dropsLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("drops.lore")) {
+
+            dropsLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(openedArena.get(player).getDrops())
+                                            )
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        dropsMeta.lore(dropsLore);
+        ItemUtil.assignPDC(itemsSection.getString("drops.key", "default"), dropsMeta);
+
+        drops.setItemMeta(dropsMeta);
+        menu.setItem(itemsSection.getInt("drops.slot", 24), drops);
 
     }
 

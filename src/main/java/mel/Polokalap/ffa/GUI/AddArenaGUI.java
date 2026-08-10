@@ -203,6 +203,34 @@ public class AddArenaGUI extends GUI implements InventoryHolder {
         explosion.setItemMeta(explosionMeta);
         menu.setItem(itemsSection.getInt("explosion.slot", 14), explosion);
 
+        ItemStack drops = new ItemStack(Material.valueOf(itemsSection.getString("drops.type")));
+        ItemMeta dropsMeta = drops.getItemMeta();
+
+        dropsMeta.displayName(ComponentUtil.getComponent("gui.add-arena.items.drops.name"));
+        List<Component> dropsLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("drops.lore")) {
+
+            dropsLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("state",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    States.getString(AddArenaCommand.arena.get(player).getDrops()))
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        dropsMeta.lore(dropsLore);
+        ItemUtil.assignPDC(itemsSection.getString("drops.key", "default"), dropsMeta);
+
+        drops.setItemMeta(dropsMeta);
+        menu.setItem(itemsSection.getInt("drops.slot", 15), drops);
+
         ItemStack confirm = new ItemStack(Material.valueOf(itemsSection.getString("confirm.type")));
         ItemMeta confirmMeta = confirm.getItemMeta();
 
