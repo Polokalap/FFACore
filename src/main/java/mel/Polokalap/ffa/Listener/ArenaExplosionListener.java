@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
@@ -112,6 +113,25 @@ public class ArenaExplosionListener implements Listener {
                 return;
 
             }
+
+        }
+
+    }
+
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event) {
+
+        for (Arena arena : ArenaUtil.getArenas()) {
+
+            if (!arena.inArea(event.getBlock().getLocation())) continue;
+
+            if (
+                arena.getExplosionState() == States.ExplosionState.BREAK ||
+                arena.getExplosionState() == States.ExplosionState.BOTH
+            ) continue;
+
+            event.setCancelled(true);
+            break;
 
         }
 

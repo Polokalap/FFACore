@@ -8,6 +8,9 @@ items:
     item: "STONE_PICKAXE"
     name: "<dark_gray>sᴇʟᴇᴄᴛɪᴏɴ ᴡᴀɴᴅ"
 
+settings:
+  combat: 30
+
 player:
   permission: "<red>You do not have permission to run that command."
   item-given: "<green>Item given succesfully!"
@@ -21,6 +24,8 @@ player:
   arena-doesnt-exist: "<red>Arena doesn't exist!"
   arena-regenerated: "<green>Arena regenerated!"
   arena-deleted: "<green>Arena <white><name></white> has been deleted!"
+  teleported: "<green>Successfully teleported to <white><name></white>!"
+  combat: "<red>You are currently in combat!"
 
 gui:
   add-arena:

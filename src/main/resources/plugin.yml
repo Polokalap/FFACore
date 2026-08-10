@@ -16,6 +16,8 @@ commands:
     description: "Add arena"
   arenas:
     description: "Open arenas menu"
+  warp:
+    description: "Warp to an arena"
 permission:
   ffa.admin:
     default: op

@@ -218,6 +218,8 @@ public class Arena {
 
     public void regenerate() {
 
+        pos1.getWorld().loadChunk(pos1.getChunk());
+        pos2.getWorld().loadChunk(pos2.getChunk());
         WorldEdit.placeSchem(pos1, pos2, uuid.toString());
 
     }

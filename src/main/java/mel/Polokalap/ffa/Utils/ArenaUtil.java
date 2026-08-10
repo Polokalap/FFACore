@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -72,6 +73,24 @@ public class ArenaUtil {
         float pitch = (float) section.getDouble("pitch");
 
         return new Location(world, x, y, z, yaw, pitch);
+
+    }
+
+    public static ArrayList<String> getArenaNamesWithAccess(Player player) {
+
+        ArrayList<String> list = new ArrayList<>();
+        ConfigurationSection arenasSection = Main.getArenasConfig().getConfigurationSection("arenas");
+
+        for (String key : arenasSection.getKeys(false)) {
+
+            String name = arenasSection.getConfigurationSection(key).getString("name");
+
+            if (!player.hasPermission("ffa.warp." + name)) continue;
+            list.add(name);
+
+        }
+
+        return list;
 
     }
 

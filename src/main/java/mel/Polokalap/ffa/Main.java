@@ -38,6 +38,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EditArenasGUIListener(), this);
         Bukkit.getPluginManager().registerEvents(new ArenaBlockListener(), this);
         Bukkit.getPluginManager().registerEvents(new ArenaExplosionListener(), this);
+        Bukkit.getPluginManager().registerEvents(new CombatListener(), this);
 
         getCommand("selection-wand").setExecutor(new SelectArenaCommand());
         getCommand("selection-wand").setTabCompleter(new SelectArenaCommand());
@@ -45,6 +46,8 @@ public final class Main extends JavaPlugin {
         getCommand("add-arena").setTabCompleter(new AddArenaCommand());
         getCommand("arenas").setExecutor(new ArenasCommand());
         getCommand("arenas").setTabCompleter(new ArenasCommand());
+        getCommand("warp").setExecutor(new WarpCommand());
+        getCommand("warp").setTabCompleter(new WarpCommand());
 
         for (Arena arena : ArenaUtil.getArenas()) {
 
