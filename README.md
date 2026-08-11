@@ -4,6 +4,8 @@ A Minecraft plugin for running Free For All arenas.
 
 > Players can pick an arena and fight without having to queue for a match. Arenas can be created and edited in-game, with options for block interaction, explosions, item drops, block decay and map regeneration.
 
+[Video on the project](https://youtu.be/cHixptjbQRo?si=sKrNJ61Wro1jKmBS)
+
 ## Features
 
 * Multiple FFA arenas
