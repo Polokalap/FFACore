@@ -22,6 +22,9 @@ A Minecraft plugin for running Free For All arenas.
 * Persistent arena configuration
 * MiniMessage-based messages and GUI text
 
+## Setup
+The plugin is developed for **Paper 1.21.11**. [Download the latest build here](https://fill-ui.papermc.io/projects/paper/version/1.21.11)
+
 ## Dependencies
 - [WorldEdit](https://modrinth.com/plugin/fastasyncworldedit)
 
