@@ -30,6 +30,10 @@ player:
   combat-left: "<green>You are no longer in combat!"
   combat-time: "<gold>⌚ <time>s"
   too-many-arenas: "<red>You have too many arenas! <white>(45/45)</white>"
+  regenerating: "<green>Regenerating arena!"
+  cursor-empty: "<red>You aren't holding an item (in the gui)"
+  not-block: "<red>You must hold a block!"
+  contains-block: "<red>This arena filter already contains this block."
 
 gui:
   add-arena:
@@ -131,6 +135,13 @@ gui:
           - "<white>to the map"
         slot: 11
         key: "warp"
+      filter:
+        name: "<gray>Filters"
+        type: "CHEST"
+        lore:
+          - "<white>There are currently <gray><size></gray> blocks active"
+        slot: 12
+        key: "filter"
       block-break:
         name: "<gray>Block Breaking/Placing"
         type: "STONECUTTER"
@@ -182,6 +193,27 @@ gui:
           - "<red><b>THIS ACTION CANNOT BE REVERTED"
         slot: 25
         key: "delete"
+  edit-filter:
+    title: "<color:#00b7ff>Edit arena: <white><name> <dark_gray>(<current>/<max>)</dark_gray>"
+    items:
+      last-page:
+        name: "<gray>Last page"
+        type: "ARROW"
+        lore:
+        slot: 45
+        key: "last-page"
+      next-page:
+        name: "<gray>Next page"
+        type: "ARROW"
+        lore:
+        slot: 53
+        key: "next-page"
+      close:
+        name: "<red>Close"
+        type: "BARRIER"
+        lore:
+        slot: 49
+        key: "close"
 
 states:
   block-state:

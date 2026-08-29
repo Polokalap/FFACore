@@ -1,6 +1,7 @@
 package mel.Polokalap.ffa.GUI;
 
 import mel.Polokalap.ffa.Commands.AddArenaCommand;
+import mel.Polokalap.ffa.Commands.ArenasCommand;
 import mel.Polokalap.ffa.Utils.*;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -235,6 +236,35 @@ public class EditArenaGUI extends GUI implements InventoryHolder {
 
         drops.setItemMeta(dropsMeta);
         menu.setItem(itemsSection.getInt("drops.slot", 24), drops);
+
+        ItemStack filter = new ItemStack(Material.valueOf(itemsSection.getString("filter.type")));
+        ItemMeta filterMeta = filter.getItemMeta();
+
+        filterMeta.displayName(ComponentUtil.getComponent("gui.edit-arena.items.filter.name"));
+        List<Component> filterLore = new ArrayList<>();
+
+        for (String line : itemsSection.getStringList("filter.lore")) {
+
+            filterLore.add(
+                    MiniMessage.miniMessage().deserialize(
+                            line,
+                            TagResolver.resolver(
+                                    Placeholder.component("size",
+                                            MiniMessage.miniMessage().deserialize(
+                                                    String.valueOf(ArenasCommand.openedArena.get(player).getFilter().size())
+                                            )
+                                    )
+                            )
+                    ).decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            );
+
+        }
+
+        filterMeta.lore(filterLore);
+        ItemUtil.assignPDC(itemsSection.getString("filter.key", "default"), filterMeta);
+
+        filter.setItemMeta(filterMeta);
+        menu.setItem(itemsSection.getInt("filter.slot", 12), filter);
 
     }
 

@@ -77,7 +77,7 @@ public class WarpCommand implements CommandExecutor, TabExecutor {
                         )
                 )
         );
-        player.teleport(arena.getSpawn());
+        arena.toSpawn(player);
 
         return true;
 

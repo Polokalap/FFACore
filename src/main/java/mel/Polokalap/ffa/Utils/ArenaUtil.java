@@ -3,6 +3,7 @@ package mel.Polokalap.ffa.Utils;
 import mel.Polokalap.ffa.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -39,6 +40,14 @@ public class ArenaUtil {
             ConfigurationSection section = arenasSection.getConfigurationSection(key);
             if (section == null) continue;
 
+            ArrayList<Material> filter = new ArrayList<>();
+
+            for (String entry : section.getStringList("filter")) {
+
+                filter.add(Material.valueOf(entry));
+
+            }
+
             list.add(
                     new Arena(
                             UUID.fromString(section.getString("uuid")),
@@ -50,7 +59,8 @@ public class ArenaUtil {
                             States.DecayTime.valueOf(section.getString("decay-time")),
                             States.RegenerationTime.valueOf(section.getString("regeneration-time")),
                             States.ExplosionState.valueOf(section.getString("explosion-state")),
-                            Boolean.parseBoolean(section.getString("drops"))
+                            Boolean.parseBoolean(section.getString("drops")),
+                            filter
                     )
             );
 

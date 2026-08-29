@@ -1,11 +1,14 @@
 package mel.Polokalap.ffa.Utils;
 
 import mel.Polokalap.ffa.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static mel.Polokalap.ffa.Main.getInstance;
@@ -22,9 +25,10 @@ public class Arena {
     private Location pos1;
     private Location pos2;
     private UUID uuid;
+    private ArrayList<Material> filter;
     private BukkitTask task;
 
-    public Arena(UUID uuid, String name, Location spawn, Location pos1, Location pos2, States.BlockState block, States.DecayTime decay, States.RegenerationTime regeneration, States.ExplosionState explosion, boolean drops) {
+    public Arena(UUID uuid, String name, Location spawn, Location pos1, Location pos2, States.BlockState block, States.DecayTime decay, States.RegenerationTime regeneration, States.ExplosionState explosion, boolean drops, ArrayList<Material> filter) {
 
         this.name = name;
         this.spawn = spawn;
@@ -36,6 +40,7 @@ public class Arena {
         this.explosionState = explosion;
         this.drops = drops;
         this.uuid = uuid;
+        this.filter = filter;
 
     }
 
@@ -189,12 +194,39 @@ public class Arena {
 
     }
 
+    public ArrayList<Material> getFilter() {
+
+        return filter;
+
+    }
+
+    public void setFilter(ArrayList<Material> filter) {
+
+        this.filter = filter;
+        writeToFile();
+
+    }
+
+    public void toSpawn(Player player) {
+
+        player.teleport(spawn.setDirection(player.getLocation().getDirection()));
+
+    }
+
     public void writeToFile() {
 
         WorldEdit.saveSchem(pos1, pos2, uuid.toString());
 
         String path = "arenas." + uuid.toString();
         var config = Main.getArenasConfig();
+
+        ArrayList<String> filterNames = new ArrayList<>();
+
+        for (Material m : filter) {
+
+            filterNames.add(m.name());
+
+        }
 
         config.set(path + ".name", name);
         config.set(path + ".uuid", uuid.toString());
@@ -204,6 +236,7 @@ public class Arena {
         config.set(path + ".regeneration-time", regenerationTime.name());
         config.set(path + ".explosion-state", explosionState.name());
         config.set(path + ".drops", drops);
+        config.set(path + ".filter", filterNames);
 
         saveLocation(path + ".spawn", spawn);
         saveLocation(path + ".pos1", pos1);
@@ -232,6 +265,15 @@ public class Arena {
     }
 
     public void regenerate() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            if (!inArea(player)) return;
+
+            player.sendMessage(ComponentUtil.getComponent("player.regenerating"));
+            toSpawn(player);
+
+        }
 
         pos1.getWorld().loadChunk(pos1.getChunk());
         pos2.getWorld().loadChunk(pos2.getChunk());

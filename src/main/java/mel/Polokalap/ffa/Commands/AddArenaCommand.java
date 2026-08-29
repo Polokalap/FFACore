@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -88,7 +89,8 @@ public class AddArenaCommand implements CommandExecutor, TabExecutor {
                         States.DecayTime.THREE_MINUTES,
                         States.RegenerationTime.NEVER,
                         States.ExplosionState.BOTH,
-                        false
+                        false,
+                        new ArrayList<>()
                 )
         );
 

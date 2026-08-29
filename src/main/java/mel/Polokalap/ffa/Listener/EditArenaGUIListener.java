@@ -3,6 +3,7 @@ package mel.Polokalap.ffa.Listener;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import mel.Polokalap.ffa.Commands.ArenasCommand;
 import mel.Polokalap.ffa.GUI.EditArenaGUI;
+import mel.Polokalap.ffa.GUI.FilterItemsGUI;
 import mel.Polokalap.ffa.Main;
 import mel.Polokalap.ffa.Utils.*;
 import net.kyori.adventure.text.Component;
@@ -244,6 +245,16 @@ public class EditArenaGUIListener implements Listener {
             item.setItemMeta(meta);
 
             Sound.Click(player);
+
+        }
+
+        if (ItemUtil.hasPDC("filter", item)) {
+
+            Sound.Click(player);
+
+            FilterItemsGUI.openedArena.put(player, arena);
+            FilterItemsGUI.playerPage.put(player, 1);
+            new FilterItemsGUI().openGUI(player);
 
         }
 

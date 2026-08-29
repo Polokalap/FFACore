@@ -26,6 +26,12 @@ public class GUI implements InventoryHolder {
 
     public void openGUI(Player player) {
 
+        openGUI(player, true);
+
+    }
+
+    public void openGUI(Player player, boolean sound) {
+
         menu = Bukkit.createInventory(holder, size, name);
 
         ItemStack empty = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
@@ -44,7 +50,7 @@ public class GUI implements InventoryHolder {
 
         player.openInventory(menu);
 
-        Sound.Open(player);
+        if (sound) Sound.Open(player);
 
     }
 
