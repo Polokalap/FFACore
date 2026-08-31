@@ -10,6 +10,8 @@ items:
 
 settings:
   combat: 30
+  combat-commands:
+    - "/msg"
 
 player:
   permission: "<red>You do not have permission to run that command."
@@ -34,6 +36,7 @@ player:
   cursor-empty: "<red>You aren't holding an item (in the gui)"
   not-block: "<red>You must hold a block!"
   contains-block: "<red>This arena filter already contains this block."
+  combat-command: "<red>You can't run this command in combat!"
 
 gui:
   add-arena:
